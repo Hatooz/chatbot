@@ -1,23 +1,22 @@
+
 const express = require('express');
 const app = express();
-const http =  require('http').Server(express);
-const socketio = require('socket.io')(http);
+
 const cors = require('cors');
 
 
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 app.use(cors());
-//ENABLE CORS
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-   });
-socketio.origins(['https://me-chat.elbizza.me/']);
-socketio.on("connection", socket => {
+
+
+io.origins(['https://me-chat.elbizza.me/']);
+io.on("connection", socket => {
     console.log("user connected");  
     socket.on('message', function (message) {
         console.log(message);
-        socketio.emit('message', message);
+        io.emit('message', message);
     });
 })
 
