@@ -5,15 +5,13 @@ const cors = require('cors');
 app.use(cors());
 
 
-// const server = require('http').createServer(app);
-// const io = require('socket.io')(server);
-// var app = express();
-var server = app.listen(3000);
-var io = require('socket.io').listen(server);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 
 app.use(function(request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.header("Access-Control-Allow-Origin", "*:*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
   });
 
@@ -26,6 +24,6 @@ io.on("connection", socket => {
     });
 })
 
-// server.listen(3000, () => {
-//     console.log("Listening to port 3k");
-// })
+server.listen(3000, () => {
+    console.log("Listening to port 3k");
+})
