@@ -1,7 +1,11 @@
 const express = require('express');
+const app = express();
 const http =  require('http').Server(express);
 const socketio = require('socket.io')(http);
+const cors = require('cors');
 
+
+app.use(cors());
 
 socketio.on("connection", socket => {
     console.log("user connected");  
