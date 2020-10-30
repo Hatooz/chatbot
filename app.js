@@ -11,7 +11,7 @@ const io = require('socket.io')(server);
 app.use(cors());
 
 
-io.origins(['https://me-vue.elbizza.me/']);
+io.origins(['https://me-vue.elbizza.me']);
 io.on("connection", socket => {
     console.log("user connected");  
     socket.on('message', function (message) {
