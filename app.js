@@ -6,7 +6,7 @@ const cors = require('cors');
 
 
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, { origins: '*:*'});
+const io = require('socket.io')(server);
 
 
 // app.use(function(request, response, next) {
@@ -15,14 +15,8 @@ const io = require('socket.io')(server, { origins: '*:*'});
 //     next();
 //   });
 
-  io.origins((origin, callback) => {
-    if (origin !== 'https://me-vue.elbizza.me') {
-      return callback('origin not allowed', false);
-    }
-    callback(null, true);
-  });
 
-// io.origins(['https://me-vue.elbizza.me/#/chat']);
+io.origins('*:*');
 io.on("connection", socket => {
     console.log("user connected");  
     socket.on('message', function (message) {
