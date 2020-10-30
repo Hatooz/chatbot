@@ -7,7 +7,7 @@ app.use(cors());
 
 // const server = require('http').createServer(app);
 // const io = require('socket.io')(server);
-var app = express();
+// var app = express();
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
