@@ -7,6 +7,7 @@ const cors = require('cors');
 
 app.use(cors());
 
+socketio.origins(['https://me-chat.elbizza.me:443']);
 socketio.on("connection", socket => {
     console.log("user connected");  
     socket.on('message', function (message) {
