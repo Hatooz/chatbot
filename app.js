@@ -11,7 +11,7 @@ const io = require('socket.io')(server);
 
 
 
-io.origins(['https://me-vue.elbizza.me']);
+io.origins(['https://me-vue.elbizza.me:443']);
 io.on("connection", socket => {
     console.log("user connected");  
     socket.on('message', function (message) {
