@@ -2,17 +2,24 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors());
+// app.use(cors());
 
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 
-app.use(function(request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*:*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
+// app.use(function(request, response, next) {
+//     response.header("Access-Control-Allow-Origin", "*:*");
+//     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//     next();
+//   });
+
+  io.origins((origin, callback) => {
+    if (origin !== 'https://me-vue.elbizza.me') {
+      return callback('origin not allowed', false);
+    }
+    callback(null, true);
   });
 
 // io.origins(['https://me-vue.elbizza.me/#/chat']);
