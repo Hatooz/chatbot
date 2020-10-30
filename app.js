@@ -5,9 +5,11 @@ const cors = require('cors');
 app.use(cors());
 
 
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-
+// const server = require('http').createServer(app);
+// const io = require('socket.io')(server);
+var app = express();
+var server = app.listen(3000);
+var io = require('socket.io').listen(server);
 
 app.use(function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "*");
@@ -24,6 +26,6 @@ io.on("connection", socket => {
     });
 })
 
-server.listen(3000, () => {
-    console.log("Listening to port 3k");
-})
+// server.listen(3000, () => {
+//     console.log("Listening to port 3k");
+// })
